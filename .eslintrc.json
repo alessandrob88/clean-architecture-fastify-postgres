@@ -4,6 +4,7 @@
         "node": true
     },
     "extends": "airbnb-base",
+    "ignorePatterns": ["**/*.js"],
     "parserOptions": {
         "ecmaVersion": "latest",
         "sourceType": "module"
