@@ -5,6 +5,7 @@
     "root": true,
     "parser": "@typescript-eslint/parser",
     "rules": {
-        "max-len": ["error", 150]
+        "max-len": ["error", 150],
+        "@typescript-eslint/no-empty-interface": "off"
     }
 }
