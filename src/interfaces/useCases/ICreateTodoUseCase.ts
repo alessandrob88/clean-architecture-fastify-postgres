@@ -1,5 +1,5 @@
-import Todo from "../../domain/models/Todo"
+import { ICreateTodo, ITodo } from "../../domain/models/ITodo"
 
 export default interface ICreateTodoUseCase {
-    execute(): Promise<Todo>
+    execute(todo: ICreateTodo): Promise<ITodo>
 }

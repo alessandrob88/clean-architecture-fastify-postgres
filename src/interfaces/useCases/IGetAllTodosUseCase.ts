@@ -1,5 +1,5 @@
-import Todo from "../../domain/models/Todo";
+import { ITodo } from "../../domain/models/ITodo";
 
 export default interface IGetAllTodosUseCase {
-    execute(limit: number, offset: number): Promise<Todo[]>
+    execute(limit: number, offset: number): Promise<ITodo[]>
 }
