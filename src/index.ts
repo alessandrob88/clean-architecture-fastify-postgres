@@ -7,6 +7,8 @@ import { CreateTodoUseCase } from './application/useCases/CreateTodoUseCase';
 import PostgresTodoDataAccess from './infrastructure/database/PostgresTodoDataAccess';
 import { GetAllTodosUseCase } from './application/useCases/GetAllTodosUseCase';
 import { GetTodoUseCase } from './application/useCases/GetTodoUseCase';
+import { UpdateTodoUseCase } from './application/useCases/UpdateTodoUseCase';
+import { DeleteTodoUseCase } from './application/useCases/DeleteTodoUseCase';
 
 async function startServer() {
   const server = fastify({ logger: true });
@@ -27,10 +29,14 @@ async function startServer() {
   const createTodoUseCase = new CreateTodoUseCase(todoRepository);
   const getAllTodoUseCase = new GetAllTodosUseCase(todoRepository);
   const getTodoUseCase = new GetTodoUseCase(todoRepository);
+  const updateTodoUseCase = new UpdateTodoUseCase(todoRepository);
+  const deleteTodoUseCase = new DeleteTodoUseCase(todoRepository);
   const todoController = new TodoController(
       createTodoUseCase,
       getAllTodoUseCase,
       getTodoUseCase,
+      updateTodoUseCase,
+      deleteTodoUseCase,
   );
 
   await server.register(todoRoutes, { todoController });
