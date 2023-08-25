@@ -1,6 +1,7 @@
 import fastify from 'fastify';
 import { fastifyPostgres } from '@fastify/postgres';
 import { fastifyEnv } from '@fastify/env';
+import cors from '@fastify/cors'
 import todoRoutes from './presentation/api/routes/todoRoutes';
 import { TodoController } from './presentation/api/controllers/TodoController';
 import { CreateTodoUseCase } from './application/useCases/CreateTodoUseCase';
@@ -16,6 +17,11 @@ async function startServer() {
   await server.register(fastifyEnv, {
     dotenv: true,
     schema: {},
+  });
+
+  await server.register(cors, {
+    origin: process.env.CORS_ALLOWED_HOST,
+    methods: process.env.CORS_ALLOWED_METHODS
   });
 
   await server.register(fastifyPostgres, {
