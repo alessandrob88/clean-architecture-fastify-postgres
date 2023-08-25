@@ -1,11 +1,12 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
+import { ITodoRoutesDependencies } from "../../../interfaces/presentation/ITodoRoutesDependencies";
 
 /**
  * Encapsulates the routes
  * @param {FastifyInstance} fastify  Encapsulated Fastify Instance
  * @param {Object} options plugin options, refer to https://www.fastify.io/docs/latest/Reference/Plugins/#plugin-options
  */
-async function todoRoutes(fastify: FastifyInstance, options: any) {
+async function todoRoutes(fastify: FastifyInstance, options: ITodoRoutesDependencies) {
     
     const todoProperties = {
         description: {
