@@ -19,7 +19,12 @@ export default class PostgresTodoDataAccess implements ITodoRepository {
     }
 
     async getAll(limit: number, offset: number): Promise<ITodo[]> {
-        const query =  "SELECT * FROM todos LIMIT $1 OFFSET $2";
+        const query = `
+            SELECT * 
+            FROM todos 
+            ORDER BY id 
+            LIMIT $1 OFFSET $2;
+        `;
         const values = [limit, offset];
 
         const { rows } = await this.client.query<ITodo>(query, values);
