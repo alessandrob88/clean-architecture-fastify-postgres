@@ -23,13 +23,10 @@ export class TodoController implements ITodoController {
     const { limit = 10, offset = 0 } = request.query as ITodoQueryParams;
     
     try {
-      if (id) {
-        const todo = await this.getTodoUseCase.execute(id);
-        reply.status(200).send(todo);
-      } else {
-        const todoList = await this.getAllTodosUseCase.execute(limit, offset);
-        reply.status(200).send(todoList);
-      }
+      const result = id ? 
+        await this.getTodoUseCase.execute(id) :
+        await this.getAllTodosUseCase.execute(limit, offset);
+      reply.status(200).send(result);
     } catch (error) {
       if (error instanceof NotFoundError) {
         reply.status(404).send({
