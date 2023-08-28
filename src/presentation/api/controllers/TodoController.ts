@@ -2,7 +2,7 @@ import { FastifyRequest, FastifyReply } from 'fastify';
 import EntityAlreadyExistsError from '../../../domain/exceptions/EntityAlreadyExistsError';
 import NotFoundError from '../../../domain/exceptions/NotFoundError';
 import { ITodoController } from '../../../interfaces/controllers/ITodoController';
-import { ITodoRouteParams, ITodoQueryParams } from '../../../interfaces/presentation/ITodoRoutesRequest';
+import { ITodoRouteParams, ITodoQueryParams, ITodoBodyParams } from '../../../interfaces/presentation/ITodoRoutesRequest';
 import ICreateTodoUseCase from '../../../interfaces/useCases/ICreateTodoUseCase';
 import IDeleteTodoUseCase from '../../../interfaces/useCases/IDeleteTodoUseCase';
 import IGetAllTodosUseCase from '../../../interfaces/useCases/IGetAllTodosUseCase';
@@ -44,7 +44,7 @@ export class TodoController implements ITodoController {
   }
 
   async createTodo(request: FastifyRequest, reply: FastifyReply) : Promise<void> {
-    const { description, completed } = request.body as any;
+    const { description, completed } = request.body as ITodoBodyParams;
     
     try {
       const todo = await this.createTodoUseCase.execute({ description, completed });
@@ -67,7 +67,7 @@ export class TodoController implements ITodoController {
 
   async updateTodo(request: FastifyRequest, reply: FastifyReply) : Promise<void> {
     const { id } = request.params as ITodoRouteParams;
-    const { description, completed } = request.body as any;
+    const { description, completed } = request.body as ITodoBodyParams;
 
     try {
       const todo = await this.updateTodoUseCase.execute(
