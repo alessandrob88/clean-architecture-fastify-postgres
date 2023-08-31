@@ -21,7 +21,7 @@ async function startServer() {
 
   await server.register(cors, {
     origin: process.env.CORS_ALLOWED_HOST,
-    methods: process.env.CORS_ALLOWED_METHODS
+    methods: process.env.CORS_ALLOWED_METHODS,
   });
 
   await server.register(fastifyPostgres, {
@@ -47,7 +47,10 @@ async function startServer() {
 
   await server.register(todoRoutes, { todoController });
 
-  server.listen({ port: (process.env.HTTP_PORT || 8080) as number }, (err, address) => {
+  server.listen({
+    host: process.env.HTTP_HOST,
+    port: (process.env.HTTP_PORT || 8080) as number,
+  }, (err, address) => {
     if (err) {
       console.error(err);
       process.exit(1);
