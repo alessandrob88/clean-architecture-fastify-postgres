@@ -1,0 +1,1 @@
+module.exports.generateSql = () => `DROP TABLE IF EXISTS todos;`;
