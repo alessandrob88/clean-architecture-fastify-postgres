@@ -43,7 +43,7 @@ async function todoRoutes(fastify: FastifyInstance, options: ITodoRoutesDependen
         body: {
             type: 'object',
             properties: todoProperties,
-            oneOf: [
+            anyOf: [
                 { required: ['description'] },
                 { required: ['completed'] },
             ],
