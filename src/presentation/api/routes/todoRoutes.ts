@@ -13,16 +13,30 @@ async function todoRoutes(fastify: FastifyInstance, options: ITodoRoutesDependen
             type: 'string',
         },
         completed: {
-            type: 'boolean'
-        }
+            type: 'boolean',
+        },
+    };
+
+    const todoGetValidationSchema = {
+        querystring: {
+            type: 'object',
+            properties: {
+                limit: {
+                    type: 'number',
+                },
+                offset: {
+                    type: 'number',
+                },
+            },
+        },
     };
 
     const todoPostValidationSchema = { 
         body: {
             type: 'object',
             required: ['description', 'completed'],
-            properties: todoProperties
-        }
+            properties: todoProperties,
+        },
     };
 
     const todoPutValidationSchema = {
@@ -31,12 +45,12 @@ async function todoRoutes(fastify: FastifyInstance, options: ITodoRoutesDependen
             properties: todoProperties,
             oneOf: [
                 { required: ['description'] },
-                { required: ['completed'] }
-            ]
-        }
+                { required: ['completed'] },
+            ],
+        },
     };
 
-    fastify.get('/todo/:id?', async function (request: FastifyRequest, reply: FastifyReply) {
+    fastify.get('/todo/:id?', { schema: todoGetValidationSchema }, async function (request: FastifyRequest, reply: FastifyReply) {
         await options.todoController.getTodo(request, reply);
     }),
     fastify.post('/todo', { schema: todoPostValidationSchema }, async function (request: FastifyRequest, reply: FastifyReply) {
