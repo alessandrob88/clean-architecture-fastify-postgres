@@ -1,0 +1,3 @@
+{
+    "migrationPattern": "./migrations/*"
+}
