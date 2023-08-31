@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "npx eslint src",
+    "lint": "eslint src",
     "build": "tsc -p tsconfig.json",
     "start": "npm run lint && npm run build && node dist/index.js",
     "start:dev": "ts-node src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "migrate": "postgrator --database $POSTGRES_DB --username $POSTGRES_USER --password $POSTGRES_PASSWORD --host $POSTGRES_SERVICE --port $POSTGRES_PORT",
+    "migrate:clean": "npm run migrate 0"
   },
   "author": "alessandrobocci88@gmail.com",
   "license": "ISC",
@@ -25,9 +27,9 @@
     "@types/node": "^20.4.10",
     "@types/pg": "^8.10.2",
     "@typescript-eslint/eslint-plugin": "^6.4.1",
-    "@typescript-eslint/parser": "^6.4.0",
-    "eslint": "^8.47.0",
-    "ts-node": "^10.9.1",
+    "@typescript-eslint/parser": "^6.4.1",
+    "eslint": "^8.48.0",
+    "postgrator-cli": "^7.0.0",
     "typescript": "^5.1.6"
   }
 }
