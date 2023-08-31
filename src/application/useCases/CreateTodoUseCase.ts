@@ -5,7 +5,7 @@ import EntityAlreadyExistsError from '../../domain/exceptions/EntityAlreadyExist
 
 export class CreateTodoUseCase implements ICreateTodoUseCase {
     constructor(private readonly todoRepository: ITodoRepository) {}
-    
+
     async execute(todo: ICreateTodo): Promise<ITodo> {
         const alreadyExistentTodo = await this.todoRepository.getByDescription(todo.description);
 
